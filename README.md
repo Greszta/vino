@@ -3,3 +3,4 @@
 ### Auteur
 
 Elodie Buczkowski
+Patrik Greszta
