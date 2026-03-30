@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\InventaireSaqController;
 use App\Models\Bouteille;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\BouteilleController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,23 +27,26 @@ Route::post('/admin/saq/update', [InventaireSaqController::class, 'mettreAJour']
   ->name('admin.saq.update');
 
 /**
- * Recherche un attribut spécifique dans la liste des attributs
- * retournés par l'API SAQ.
+ * Recherche un attribut spécifique dans la liste des attributs SAQ
  *
- * @param array $attributes Liste des attributs d'un produit
- * @param string $nomRecherche Nom de l'attribut à rechercher
- * @return string|null Valeur trouvée ou null
+ * @param array $attributes
+ * @param string $nomRecherche
+ * @return string|null
  */
+
 function trouverAttribut(array $attributes, string $nomRecherche): ?string
 {
   foreach ($attributes as $attribute) {
     if (($attribute['name'] ?? '') === $nomRecherche) {
+
       $valeur = $attribute['value'] ?? null;
 
+      // Si la valeur est un tableau → on la transforme en string
       if (is_array($valeur)) {
         return implode(', ', array_map('strval', $valeur));
       }
 
+      // Sinon on retourne une string ou null
       return $valeur !== null ? (string) $valeur : null;
     }
   }
@@ -104,10 +108,6 @@ Route::get('/test-saq', function () {
     GRAPHQL;
 
   $response = Http::withOptions([
-    /*
-         * Désactive temporairement la vérification SSL en environnement local.
-         * À remplacer par une configuration SSL valide en production.
-         */
     'verify' => false,
     'curl' => [
       CURLOPT_SSL_VERIFYPEER => false,
@@ -124,6 +124,35 @@ Route::get('/test-saq', function () {
   ])->post(env('SAQ_GRAPHQL_URL'), [
     'query' => $query,
   ]);
+
+  $data = $response->json();
+  $items = $data['data']['productSearch']['items'] ?? [];
+
+  foreach ($items as $item) {
+    $attributes = $item['productView']['attributes'] ?? [];
+
+    $pays = trouverAttribut($attributes, 'pays_origine');
+    $cepage = trouverAttribut($attributes, 'cepage');
+    $millesime = trouverAttribut($attributes, 'millesime_produit');
+    $alcool = trouverAttribut($attributes, 'pourcentage_alcool_par_volume');
+    $type = trouverAttribut($attributes, 'identite_produit');
+
+    Bouteille::updateOrCreate(
+      [
+        'code_saq' => $item['product']['sku'],
+      ],
+      [
+        'nom' => $item['productView']['name'],
+        'type' => $type,
+        'pays' => $pays,
+        'cepage' => $cepage,
+        'millesime' => is_numeric($millesime) ? (int) $millesime : null,
+        'taux_alcool' => is_numeric($alcool) ? (float) $alcool : null,
+        'prix' => $item['product']['price_range']['minimum_price']['regular_price']['value'] ?? null,
+        'est_saq' => true,
+      ]
+    );
+  }
 
   if ($response->failed()) {
     return response()->json([
