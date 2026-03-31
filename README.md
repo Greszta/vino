@@ -1,5 +1,7 @@
 # vino
 
+Branche feature connexion utilisateur
+
 ### Auteurs
 
 Elodie Buczkowski
