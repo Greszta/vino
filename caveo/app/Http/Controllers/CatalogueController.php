@@ -13,7 +13,19 @@ class CatalogueController extends Controller
      */
     public function index()
     {
-        $bouteilles = Bouteille::paginate(25);
+        // Base de la requête
+        $query = Bouteille::query();
+
+        // Si un terme de recherche est présent
+        if ($search = request('recherche')) {
+            // Filtre les noms qui commencent par la recherche
+            $query->where('nom', 'like', $search . '%');
+        }
+
+        // Pagination + conservation du paramètre de recherche
+        $bouteilles = $query->paginate(25)->withQueryString();
+
+        // Retourne la vue avec les données
         return view('catalogue.index', compact('bouteilles'));
     }
 }
