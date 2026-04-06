@@ -60,7 +60,7 @@ function trouverAttribut(array $attributes, string $nomRecherche): ?string
  */
 Route::get('/', function () {
   return view('welcome');
-});
+})->name('accueil');
 
 /**
  * Route vers le catalogue
