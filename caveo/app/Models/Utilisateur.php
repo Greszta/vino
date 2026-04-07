@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class Utilisateur extends Authenticatable
 {
     use HasFactory;
-
+    
     /**
      * Model `Utilisateur` — représente la table `utilisateurs`.
      * Étend `Authenticatable` pour l'usage avec le système d'authentification Laravel.
