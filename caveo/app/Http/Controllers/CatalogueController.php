@@ -47,11 +47,21 @@ class CatalogueController extends Controller
         // Pagination
         $bouteilles = $query->paginate(25)->withQueryString();
 
-        // Valeurs uniques pour les filtres, sans null
-        $types = Bouteille::whereNotNull('type')->distinct()->pluck('type');
-        $pays = Bouteille::whereNotNull('pays')->distinct()->pluck('pays');
-        $formats = Bouteille::whereNotNull('format')->distinct()->pluck('format');
-        $millesimes = Bouteille::whereNotNull('millesime')->distinct()->pluck('millesime');
+        // Valeurs uniques pour les filtres, sans null et triées
+
+        // Type : ordre alphabétique
+        $types = Bouteille::whereNotNull('type')->distinct()->orderBy('type')->pluck('type');
+
+        // Pays : ordre alphabétique
+        $pays = Bouteille::whereNotNull('pays')->distinct()->orderBy('pays')->pluck('pays');
+
+        // Formats / quantités : tri croissant numérique
+        // Utilisation de orderByRaw avec CAST(... AS UNSIGNED) pour que les valeurs stockées en texte (ex : "600", "700", "1000") 
+        // soient triées correctement comme des nombres et non comme des chaînes
+        $formats = Bouteille::whereNotNull('format')->distinct()->orderByRaw('CAST(format AS UNSIGNED) ASC')->pluck('format');
+
+        // Millésime : ordre croissant numérique
+        $millesimes = Bouteille::whereNotNull('millesime')->distinct()->orderBy('millesime')->pluck('millesime');
 
         return view('catalogue.index', compact('bouteilles', 'types', 'pays', 'formats', 'millesimes'));
     }
