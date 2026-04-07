@@ -76,6 +76,14 @@ Route::get('/', function () {
 Route::get('/catalogue', [CatalogueController::class, 'index'])->name('catalogue.index');
 
 /**
+ * Route vers la fiche détail
+ */
+Route::get('/bouteilles/{bouteille}', [BouteilleController::class, 'show'])
+  ->name('bouteilles.show')
+  ->missing(function(){
+    return redirect('/catalogue');
+});
+/*
  * Afficher le formulaire d'inscription (UI seulement) et traiter la soumission.
  * La page utilise le layout `layouts.main` (header/footer inchangés).
  */
