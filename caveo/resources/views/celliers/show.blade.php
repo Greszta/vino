@@ -3,9 +3,10 @@
 @section('title', $cellier->nom)
 
 @section('fleche')
-<a href="{{ route('celliers.index') }}" class="text-white text-2xl leading-none" aria-label="Retour">
-    ←
-</a>
+    <!-- Flèche de retour qui revient à la page précédente (Cellier ou Catalogue) -->
+    <a href="{{ url()->previous() }}">
+        <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" alt="Flèche de retour" class="w-10 h-10">
+    </a>
 @endsection
 
 @section('content')
