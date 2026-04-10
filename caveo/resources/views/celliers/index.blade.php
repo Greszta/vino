@@ -66,28 +66,30 @@
         </div>
 
         {{-- Actions --}}
-        <div class="mt-3 flex flex-col gap-2">
-            <div>
-                <a href="{{ route('celliers.show', $cellier) }}"
-                    class="inline-block px-4 py-2 bg-[#A83248] text-white rounded text-sm font-medium">
-                    Voir le cellier
-                </a>
-            </div>
+        <div class="mt-3 flex flex-wrap gap-y-2">
+            {{-- Bouton principal --}}
+            <a href="{{ route('celliers.show', $cellier) }}"
+                class="px-4 py-2 bg-[#A83248] text-white rounded text-sm">
+                Voir le cellier
+            </a>
 
-            <div class="flex items-center gap-3">
+            {{-- Actions secondaires alignées --}}
+            <div class="w-full flex items-center gap-4">
                 <a href="{{ route('celliers.edit', $cellier) }}"
-                    class="text-xs text-gray-500 hover:text-gray-700">
+                    class="text-xs leading-none text-gray-500 hover:text-gray-700">
                     Modifier
                 </a>
 
-                <form method="POST" action="{{ route('celliers.destroy', $cellier) }}">
+                <form method="POST"
+                    action="{{ route('celliers.destroy', $cellier) }}"
+                    class="m-0 p-0 inline-flex">
                     @csrf
                     @method('DELETE')
 
                     <button
                         type="submit"
                         onclick="return confirm('Voulez-vous vraiment supprimer ce cellier ? Cette action est irréversible.')"
-                        class="text-xs text-red-500 hover:text-red-700">
+                        class="text-xs leading-none text-red-500 hover:text-red-700">
                         Supprimer
                     </button>
                 </form>
