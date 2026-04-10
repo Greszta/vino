@@ -8,9 +8,6 @@ use Illuminate\Http\Request;
 
 class CatalogueController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $query = Bouteille::query();
@@ -30,14 +27,20 @@ class CatalogueController extends Controller
             $query->whereIn('pays', $pays);
         }
 
-        // Filtre par formats (OU)
+        // Filtre par formats (CHOIX UNIQUE)
         if ($formats = request('formats')) {
-            $query->whereIn('format', $formats);
+            // Si un format est sélectionné (une seule valeur)
+            if (!empty($formats)) {
+                $query->where('format', $formats);
+            }
         }
 
-        // Filtre par millésimes (OU)
+        // Filtre par millésimes (CHOIX UNIQUE)
         if ($millesimes = request('millesimes')) {
-            $query->whereIn('millesime', $millesimes);
+            // Si un millésime est sélectionné (une seule valeur)
+            if (!empty($millesimes)) {
+                $query->where('millesime', $millesimes);
+            }
         }
 
         // Tri
@@ -50,7 +53,6 @@ class CatalogueController extends Controller
 
         // TYPES
         $selectedTypes = request('types', []);
-
         $types = Bouteille::whereNotNull('type')
             ->distinct()
             ->pluck('type')
@@ -64,7 +66,6 @@ class CatalogueController extends Controller
 
         // PAYS
         $selectedPays = request('pays', []);
-
         $pays = Bouteille::whereNotNull('pays')
             ->distinct()
             ->pluck('pays')
@@ -76,30 +77,28 @@ class CatalogueController extends Controller
             })
             ->values();
 
-        // FORMATS
-        $selectedFormats = request('formats', []);
-
+        // FORMATS (choix unique)
+        $selectedFormats = request('formats', null); // Use null instead of array
         $formats = Bouteille::whereNotNull('format')
             ->distinct()
             ->orderByRaw('CAST(format AS UNSIGNED) ASC')
             ->pluck('format')
             ->sortBy(function ($f) use ($selectedFormats) {
                 return [
-                    !in_array($f, $selectedFormats),
+                    $f != $selectedFormats, // Sort selected format to the top
                     (int) $f
                 ];
             })
             ->values();
 
-        // MILLÉSIMES
-        $selectedMillesimes = request('millesimes', []);
-
+        // MILLÉSIMES (choix unique)
+        $selectedMillesimes = request('millesimes', null); // Use null instead of array
         $millesimes = Bouteille::whereNotNull('millesime')
             ->distinct()
             ->pluck('millesime')
             ->sortBy(function ($m) use ($selectedMillesimes) {
                 return [
-                    !in_array($m, $selectedMillesimes),
+                    $m != $selectedMillesimes, // Sort selected millesime to the top
                     $m
                 ];
             })
