@@ -44,7 +44,7 @@
                     <p class="text-sm font-roboto font-medium">Cellier</p>
                 </a>
 
-                <a href="#" class="flex flex-col items-center gap-1 px-3 py-1">
+                <a href="#" class="flex flex-col items-center gap-1 px-3 py-1 invisible">
                     <img src="{{ asset('images/icons/ajouter-inactif.svg') }}" alt="Ajouter" class="w-6 h-6">
                     <p class="text-sm font-roboto font-medium">Ajouter</p>
                 </a>
@@ -53,10 +53,10 @@
                     <img src="{{ request()->routeIs('catalogue.index')
             ? asset('images/icons/loop-actif.svg')
             : asset('images/icons/loop-inactif.svg') }}" alt="Explorer" class="w-6 h-6 object-contain">
-                    <p class="text-sm font-roboto font-medium">Explorer</p>
+                    <p class="text-sm font-roboto font-medium">Bouteilles</p>
                 </a>
 
-                <a href="#" class="flex flex-col items-center gap-1 px-3 py-1">
+                <a href="#" class="flex flex-col items-center gap-1 px-3 py-1 invisible">
                     <img src="{{ asset('images/icons/profil-inactif.svg') }}" alt="Profil" class="w-6 h-6">
                     <p class="text-sm font-roboto font-medium">Profil</p>
                 </a>
