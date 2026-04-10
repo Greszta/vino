@@ -153,7 +153,7 @@
 
     @foreach($bouteilles as $bouteille)
         <div class="flex gap-6 m-4 mb-6 font-roboto border p-4 rounded">
-            <div class="w-[90px] flex justify-center">
+            <div class="w-[90px] flex justify-center items-center">
                 <img src="{{ $bouteille->image ?? asset('images/bouteille-vide.png') }}" alt="" class="w-auto h-[135px]">
             </div>
 
