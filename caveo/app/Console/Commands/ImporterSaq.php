@@ -64,7 +64,7 @@ class ImporterSaq extends Command
       $totalImporte = 0;
       $totalIgnores = 0;
 
-      do {
+      while (true) {
         $this->info("Import de la page {$page}...");
 
         $response = $this->envoyerRequeteSaq($page, $pageSize);
@@ -79,10 +79,15 @@ class ImporterSaq extends Command
         $data = $response->json();
         $items = $data['data']['productSearch']['items'] ?? [];
 
+        /**
+         * Arrêt normal si aucune donnée n'est retournée.
+         */
         if (empty($items)) {
           $this->info("Aucun item retourné à la page {$page}. Fin de l'import.");
           break;
         }
+
+        $totalImporteAvantPage = $totalImporte;
 
         foreach ($items as $item) {
           if ($this->traiterItem($item)) {
@@ -94,15 +99,28 @@ class ImporterSaq extends Command
 
         $this->info("Page {$page} terminée. Importés : {$totalImporte} | Ignorés : {$totalIgnores}");
 
+        /**
+         * Arrêt intelligent :
+         * si aucune nouvelle bouteille n'a été importée sur la page courante,
+         * on considère que l'import est arrivé à sa fin utile.
+         */
+        if ($totalImporte === $totalImporteAvantPage) {
+          $this->warn("Aucune nouvelle bouteille ajoutée à la page {$page}. Fin de l'import.");
+          break;
+        }
+
         $page++;
 
-        sleep(1);
-
+        /**
+         * Arrêt de sécurité pour éviter une boucle infinie.
+         */
         if ($page > self::LIMITE_PAGES_SECURITE) {
           $this->warn('Arrêt de sécurité atteint : limite maximale de pages dépassée.');
           break;
         }
-      } while (true);
+
+        sleep(1);
+      }
 
       $this->info('Import terminé avec succès.');
       $this->info("Nombre total de vins importés : {$totalImporte}");
@@ -175,6 +193,9 @@ class ImporterSaq extends Command
   /**
    * Traite un item retourné par l'API SAQ.
    *
+   * Retourne true uniquement lorsqu'une nouvelle bouteille
+   * est réellement créée dans la base de données.
+   *
    * @param array $item
    * @return bool
    */
@@ -211,7 +232,7 @@ class ImporterSaq extends Command
       return false;
     }
 
-    Bouteille::updateOrCreate(
+    $bouteille = Bouteille::updateOrCreate(
       [
         'code_saq' => $codeSaq,
       ],
@@ -234,7 +255,12 @@ class ImporterSaq extends Command
       ]
     );
 
-    return true;
+    /**
+     * On considère comme "importé" uniquement un nouvel enregistrement.
+     * Une bouteille déjà existante mise à jour ne compte pas
+     * comme une nouvelle importation.
+     */
+    return $bouteille->wasRecentlyCreated;
   }
 
   /**
