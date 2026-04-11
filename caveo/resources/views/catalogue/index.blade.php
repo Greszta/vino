@@ -184,7 +184,7 @@
         <div class="flex gap-2 flex-wrap">
             <a href="{{ route('bouteilles.show', $bouteille->id) }}?source=catalogue"
                 class="px-2.5 py-2 border border-gray-300 text-white rounded text-sm font-medium flex items-center gap-2 w-max">
-                <img src="{{ asset('images/symbole/info-red.svg') }}" alt="information" class="w-6 h-6">
+                <img src="{{ asset('images/symbole/info.svg') }}" alt="information" class="w-6 h-6">
             </a>
 
             @if($celliers->isNotEmpty())
