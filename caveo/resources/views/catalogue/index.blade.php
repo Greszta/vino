@@ -19,7 +19,7 @@
                 id="search-input">
 
             <button type="submit" id="clearBtn" class="bg-[#7A2B3A] text-white px-4 h-12 rounded flex items-center justify-center">
-                <img src="{{ asset('images/symbole_x/symbole-x.svg') }}" alt="" class="w-6 h-6">
+                <img src="{{ asset('images/symbole/symbole-x.svg') }}" alt="" class="w-6 h-6">
             </button>
         </div>
         <p class="italic font-bold text-sm md:text-base" style="color: #7A1E2E;">Se soumet automatiquement après 3 secondes</p>
