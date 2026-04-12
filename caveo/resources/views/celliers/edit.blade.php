@@ -30,7 +30,7 @@
 
         @include('celliers._form')
 
-        <div class="flex gap-3 pt-2">
+        <div class="flex gap-3 pt-2 mb-24">
             <button type="submit" class="w-1/2 bg-[#A83248] text-white py-3 rounded font-medium">
                 Sauvegarder
             </button>
