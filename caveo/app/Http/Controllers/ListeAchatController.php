@@ -94,4 +94,41 @@ class ListeAchatController extends Controller
             'Accès non autorisé à cette liste d\'achat.'
         );
     }
+
+    public function addBouteille(Request $request, ListeAchat $liste)
+    {
+        $validated = $request->validate([
+            'id_bouteille' => 'required|integer|exists:bouteilles,id',
+            'quantite' => 'required|integer|min:1|max:999',
+        ], [
+            'id_bouteille.required' => 'La bouteille est obligatoire.',
+            'id_bouteille.exists' => 'La bouteille sélectionnée est invalide.',
+            'quantite.required' => 'La quantité est obligatoire.',
+            'quantite.integer' => 'La quantité doit être un nombre entier.',
+            'quantite.min' => 'La quantité doit être d’au moins 1.',
+            'quantite.max' => 'La quantité ne peut pas dépasser 999.',
+        ]);
+
+        $bouteilleExistante = $liste->bouteilles()
+            ->where('id_bouteille', $validated['id_bouteille'])
+            ->first();
+
+        if ($bouteilleExistante) {
+            $nouvelleQuantite = $bouteilleExistante->pivot->quantite + $validated['quantite'];
+
+            $liste->bouteilles()->updateExistingPivot(
+                $validated['id_bouteille'],
+                ['quantite' => $nouvelleQuantite]
+            );
+
+            return back()->with('status', 'La quantité a été mise à jour.');
+        }
+
+        $liste->bouteilles()->attach(
+            $validated['id_bouteille'],
+            ['quantite' => $validated['quantite']]
+        );
+
+        return back();
+    }
 }
