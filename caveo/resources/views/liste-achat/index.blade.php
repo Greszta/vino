@@ -41,12 +41,12 @@
     @foreach($listes as $liste)
 
     <div class="m-4 border rounded bg-white">
-        <!-- HEADER ROW -->
+        <!-- Entête clickable -->
         <div
             class="w-full p-4 flex justify-between items-center hover:bg-gray-50 cursor-pointer toggle-liste"
             data-target="liste-{{ $liste->id }}">
 
-            <!-- LEFT: TITLE -->
+            <!-- GAUCHE : TITRE -->
             <div class="min-w-0">
                 <h2 class="font-semibold text-lg">
                     {{ $liste->nom }}
@@ -59,7 +59,7 @@
                 @endif
             </div>
 
-            <!-- RIGHT: ACTIONS -->
+            <!-- DROITE : ACTIONS -->
             <div class="flex items-center gap-3 flex-shrink-0">
 
                 <a href="{{ route('achat.edit', $liste) }}"
@@ -82,7 +82,7 @@
 
         </div>
 
-        <!-- DROPDOWN CONTENT -->
+        <!-- CONTENUE DROPDOWN -->
         <div id="liste-{{ $liste->id }}" class="hidden border-t p-4">
             @if($liste->bouteilles->isEmpty())
                 <p class="text-sm text-gray-500">
