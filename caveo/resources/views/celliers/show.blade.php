@@ -15,9 +15,16 @@
 
     {{-- Header --}}
     <div class="mb-6">
-        <h1 class="text-3xl text-[#7A1E2E]" style="font-family: 'Crimson Text', serif;">
-            {{ $cellier->nom }}
-        </h1>
+        <div class="flex flex-wrap items-center justify-between gap-4">
+            <h1 class="text-3xl text-[#7A1E2E]" style="font-family: 'Crimson Text', serif;">
+                {{ $cellier->nom }}
+            </h1>
+
+            <a href="{{ route('catalogue.index') }}"
+            class="bg-[#A83248] text-white px-4 py-3 rounded font-semibold whitespace-nowrap">
+                Ajouter des bouteilles
+            </a>
+        </div>
 
         <div class="mt-3 text-sm text-gray-700 space-y-1">
             @if($cellier->emplacement)
@@ -35,7 +42,7 @@
     {{-- Inventaire --}}
     <div class="space-y-4 pb-20">
         @forelse($cellier->inventaires as $inventaire)
-        <div class="flex gap-6 m-4 mb-6 font-roboto border p-4 rounded bg-white">
+        <div class="flex gap-6 mb-6 font-roboto border p-4 rounded bg-white">
             {{-- Image --}}
             <div class="w-[90px] flex justify-center items-center shrink-0">
                 <img
