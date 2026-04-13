@@ -113,6 +113,7 @@ Route::middleware('auth')->group(function () {
   Route::post('/achat/creation', [ListeAchatController::class, 'store'])->name('achat.store');
 
   Route::get('/achat/{liste}', [ListeAchatController::class, 'edit'])->name('achat.edit');
+  Route::put('/achat/{liste}', [ListeAchatController::class, 'update'])->name('achat.update');
 
   Route::delete('/achat/{liste}', [ListeAchatController::class, 'destroy'])->name('achat.destroy'); 
   
