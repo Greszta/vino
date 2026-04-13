@@ -10,7 +10,18 @@ use Illuminate\Support\Facades\Auth;
 class ListeAchatController extends Controller
 {
     public function index(){
-        return view('liste-achat.index');
+        /**
+         * Liste d'achat de l'utilisateur connecté.
+         */
+        $listes = collect();
+
+        if (Auth::check()) {
+            $listes = ListeAchat::where('id_utilisateur', Auth::id())
+                ->orderBy('nom')
+                ->get();
+        }
+
+        return view('liste-achat.index', ['listes' => $listes]);
     }
 
     public function create(){
