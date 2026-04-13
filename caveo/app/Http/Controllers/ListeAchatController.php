@@ -47,6 +47,13 @@ class ListeAchatController extends Controller
             ->route('achat.index');
     }
 
+    public function edit(ListeAchat $liste)
+    {
+        $this->verifierProprietaire($liste);
+
+        return view('liste-achat.edit', compact('liste'));
+    }
+
     public function destroy(ListeAchat $liste)
     {
         $this->verifierProprietaire($liste);
