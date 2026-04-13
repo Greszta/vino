@@ -54,6 +54,25 @@ class ListeAchatController extends Controller
         return view('liste-achat.edit', compact('liste'));
     }
 
+    public function update(Request $request, ListeAchat $liste)
+    {
+        $this->verifierProprietaire($liste);
+
+        $validated = $request->validate([
+            'nom' => 'required|string|max:75',
+            'description' => 'nullable|string|max:2000',
+        ]);
+
+        $liste->update([
+            'nom' => $validated['nom'],
+            'description' => $validated['description'] ?? null,
+        ]);
+
+        return redirect()
+            ->route('achat.index')
+            ->with('status', 'La liste d\'achat a été modifié avec succès.');
+    }
+
     public function destroy(ListeAchat $liste)
     {
         $this->verifierProprietaire($liste);
