@@ -62,7 +62,7 @@
 
             <div class="flex items-center gap-3">
                 <!-- Modifier -->
-                <a href="#"
+                <a href="{{ route('achat.edit', $liste) }}"
                     class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
                     title="Modifier la liste d'achat"
                     aria-label="Modifier la liste d'achat">
@@ -70,7 +70,7 @@
                 </a>
 
                 <!-- Supprimer -->
-                <form method="POST" action="{{ route('achat.destroy', $liste->id) }}" class="inline-flex">
+                <form method="POST" action="{{ route('achat.destroy', $liste) }}" class="inline-flex">
                     @csrf
                     @method('DELETE')
 
