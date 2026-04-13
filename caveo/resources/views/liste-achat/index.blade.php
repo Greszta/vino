@@ -41,30 +41,49 @@
     @foreach($listes as $liste)
 
     <div class="m-4 border rounded bg-white">
-
-        <!-- HEADER CLIQUABLE  -->
-        <button type="button"
-            class="w-full text-left p-4 flex justify-between items-center hover:bg-gray-50 toggle-liste"
+        <!-- HEADER ROW -->
+        <div
+            class="w-full p-4 flex justify-between items-center hover:bg-gray-50 cursor-pointer toggle-liste"
             data-target="liste-{{ $liste->id }}">
 
-            <div>
+            <!-- LEFT: TITLE -->
+            <div class="min-w-0">
                 <h2 class="font-semibold text-lg">
                     {{ $liste->nom }}
                 </h2>
 
                 @if(!empty($liste->description))
-                    <p class="text-sm text-gray-600">
+                    <p class="text-sm text-gray-600 truncate">
                         {{ $liste->description }}
                     </p>
                 @endif
             </div>
 
-            <span class="text-xl transition">⌄</span>
-        </button>
+            <!-- RIGHT: ACTIONS -->
+            <div class="flex items-center gap-3 flex-shrink-0">
 
-        <!-- CONTENU DROPDOWN  -->
+                <a href="{{ route('achat.edit', $liste) }}"
+                    class="w-10 h-10 flex items-center justify-center border rounded hover:bg-gray-100">
+                    <img src="{{ asset('images/icons/crayon.svg') }}" class="w-6 h-6">
+                </a>
+
+                <form method="POST" action="{{ route('achat.destroy', $liste) }}">
+                    @csrf
+                    @method('DELETE')
+
+                    <button type="submit"
+                        onclick="return confirm('Supprimer cette liste ?')"
+                        class="w-10 h-10 flex items-center justify-center border rounded hover:bg-gray-100">
+                        <img src="{{ asset('images/icons/poubelle.svg') }}" class="w-6 h-6">
+                    </button>
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- DROPDOWN CONTENT -->
         <div id="liste-{{ $liste->id }}" class="hidden border-t p-4">
-
             @if($liste->bouteilles->isEmpty())
                 <p class="text-sm text-gray-500">
                     Aucune bouteille dans cette liste
@@ -96,29 +115,11 @@
                 @endforeach
             </div>
             @endif
-
         </div>
 
-        <!-- ACTIONS -->
-        <div class="p-4 flex justify-end gap-3 border-t">
+    </div>
 
-            <a href="{{ route('achat.edit', $liste) }}"
-                class="w-10 h-10 flex items-center justify-center border rounded hover:bg-gray-100">
-                <img src="{{ asset('images/icons/crayon.svg') }}" class="w-6 h-6">
-            </a>
-
-            <form method="POST" action="{{ route('achat.destroy', $liste) }}">
-                @csrf
-                @method('DELETE')
-
-                <button type="submit"
-                    onclick="return confirm('Supprimer cette liste ?')"
-                    class="w-10 h-10 flex items-center justify-center border rounded hover:bg-gray-100">
-                    <img src="{{ asset('images/icons/poubelle.svg') }}" class="w-6 h-6">
-                </button>
-            </form>
-
-        </div>
+        
 
     </div>
 
