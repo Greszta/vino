@@ -50,9 +50,11 @@ class InventaireController extends Controller
             $inventaire->quantite += $validated['quantite'];
             $inventaire->save();
 
-            return redirect()
-                ->route('celliers.show', $cellier)
-                ->with('status', 'La quantité de la bouteille a été mise à jour.');
+            if (request()->expectsJson()) {
+                return response()->json(['success' => true]);
+            }
+
+            return redirect()->route('celliers.show', $cellier);
         }
 
         Inventaire::create([
@@ -126,8 +128,9 @@ class InventaireController extends Controller
 
         if ($request->input('source_page') === 'bouteille') {
             return redirect()->to(
-                route('bouteilles.show', $request->input('id_bouteille')) . '?source=cellier&inventaire=' . $inventaire->id)
-                    ->with('status', 'La quantité a été mise à jour.');
+                route('bouteilles.show', $request->input('id_bouteille')) . '?source=cellier&inventaire=' . $inventaire->id
+            )
+                ->with('status', 'La quantité a été mise à jour.');
         }
 
         return redirect()
