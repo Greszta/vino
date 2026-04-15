@@ -11,6 +11,7 @@
 
 @section('content')
     <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
+    <script type="module" src="{{ asset('js/confirmation-suppression-bouteille.js') }}"></script>
     <section class="px-4 py-5 pb-48 max-w-5xl mx-auto font-roboto">
 
         {{-- Header --}}
@@ -103,9 +104,9 @@
                                     @csrf
                                     @method('DELETE')
 
-                                    <button type="submit" onclick="return confirm('Supprimer cette bouteille ?')"
-                                        class="px-2 py-2 border border-gray-300 text-gray-600 rounded hover:bg-gray-100 flex items-center justify-center"
-                                        title="Supprimer la bouteille" aria-label="Supprimer la bouteille">
+                                    <button type="submit"
+                                        class="bouton-supprimer px-2 py-2 border border-gray-300 text-gray-600 rounded hover:bg-gray-100 flex items-center justify-center"
+                                        data-confirm="Supprimer cette bouteille ?" aria-label="Supprimer la bouteille">
                                         <img src="{{ asset('images/icons/poubelle.svg') }}" alt="" aria-hidden="true"
                                             class="w-6 h-6">
                                     </button>
