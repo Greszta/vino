@@ -95,6 +95,43 @@ Route::middleware('auth')->group(function () {
     ->name('inventaires.store');
 
   /**
+   * Affiche le formulaire pour ajouter une bouteille non listée
+   * directement dans un cellier spécifique.
+   *
+   * @param \App\Models\Cellier $cellier
+   */
+  Route::get('/celliers/{cellier}/bouteilles/create', [BouteilleController::class, 'createFromCellier'])
+    ->name('celliers.bouteilles.create');
+
+  /**
+   * Enregistre une nouvelle bouteille non listée
+   * et l'ajoute automatiquement à l'inventaire du cellier.
+   *
+   * @param \App\Models\Cellier $cellier
+   */
+  Route::post('/celliers/{cellier}/bouteilles', [BouteilleController::class, 'storeFromCellier'])
+    ->name('celliers.bouteilles.store');
+
+  /**
+   * Affiche le formulaire de modification d'une bouteille non listée
+   * associée à un cellier.
+   */
+  Route::get('/celliers/{cellier}/bouteilles/{bouteille}/edit', [BouteilleController::class, 'editFromCellier'])
+    ->name('celliers.bouteilles.edit');
+
+  /**
+   * Met à jour une bouteille non listée associée à un cellier.
+   */
+  Route::put('/celliers/{cellier}/bouteilles/{bouteille}', [BouteilleController::class, 'updateFromCellier'])
+    ->name('celliers.bouteilles.update');
+
+  /**
+   * Supprime une bouteille non listée associée à un cellier.
+   */
+  Route::delete('/celliers/{cellier}/bouteilles/{bouteille}', [BouteilleController::class, 'destroyFromCellier'])
+    ->name('celliers.bouteilles.destroy');
+
+  /**
    * Met à jour une ligne d'inventaire.
    */
   Route::put('/inventaires/{inventaire}', [InventaireController::class, 'update'])
