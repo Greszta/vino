@@ -122,19 +122,25 @@
         <div class="space-y-3 mb-6">
             @foreach($utilisateurs as $utilisateur)
             <div class="border border-gray-200 rounded-lg p-4 hover:border-[#7A1E2E] transition duration-200">
-                <div class="flex justify-between items-start mb-2">
+                <div class="flex justify-between items-start">
                     <div class="flex-1">
-                        <p class="text-base font-bold text-[#1A1A1A]">
+                        <p class="text-base font-bold text-[#1A1A1A] mb-2">
                             {{ $utilisateur->prenom }} {{ $utilisateur->nom }}
                         </p>
-                        <p class="text-sm text-gray-600">
+                        <p class="text-sm text-gray-600 mb-2">
                             {{ $utilisateur->email }}
                         </p>
+                        <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
+                            {{ $utilisateur->role->nom === 'Administrateur' ? 'bg-red-100 text-red-800' : 'bg-gray-200 text-gray-500' }}">
+                            {{ $utilisateur->role->nom ?? 'Non défini' }}
+                        </span>
                     </div>
-                    <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium
-                        {{ $utilisateur->role->nom === 'Administrateur' ? 'bg-red-100 text-red-800' : 'bg-gray-200 text-gray-500' }}">
-                        {{ $utilisateur->role->nom ?? 'Non défini' }}
-                    </span>
+                    <a href="{{ route('admin.utilisateurs.edit', $utilisateur) }}"
+                        class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
+                        title="Modifier l'utilisateur"
+                        aria-label="Modifier l'utilisateur">
+                        <img src="{{ asset('images/icons/crayon.svg') }}" alt="" aria-hidden="true" class="w-6 h-6">
+                    </a>
                 </div>
             </div>
             @endforeach

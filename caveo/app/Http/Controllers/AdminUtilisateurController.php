@@ -13,7 +13,8 @@ use Illuminate\Http\Request;
  * - l'affichage paginé des utilisateurs ;
  * - la recherche textuelle par nom, prénom ou email ;
  * - le filtre par rôle ;
- * - le tri alphabétique par défaut.
+ * - le tri alphabétique par défaut ;
+ * - la modification des informations utilisateur.
  */
 class AdminUtilisateurController extends Controller
 {
@@ -67,5 +68,58 @@ class AdminUtilisateurController extends Controller
             'utilisateurs',
             'roles'
         ));
+    }
+
+    /**
+     * Affiche le formulaire de modification d'un utilisateur.
+     *
+     * @param \App\Models\Utilisateur $utilisateur
+     * @return \Illuminate\View\View
+     */
+    public function edit(Utilisateur $utilisateur)
+    {
+        /**
+         * Liste des rôles disponibles pour le formulaire.
+         */
+        $roles = Role::orderBy('nom')->get();
+
+        return view('admin.utilisateurs.edition', compact(
+            'utilisateur',
+            'roles'
+        ));
+    }
+
+    /**
+     * Met à jour les informations d'un utilisateur.
+     *
+     * @param \Illuminate\Http\Request $request
+     * @param \App\Models\Utilisateur $utilisateur
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function update(Request $request, Utilisateur $utilisateur)
+    {
+        /**
+         * Validation des données.
+         */
+        $validated = $request->validate([
+            'prenom' => 'required|string|max:55',
+            'nom' => 'required|string|max:55',
+            'email' => 'required|email|max:255|unique:utilisateurs,email,' . $utilisateur->id,
+            'id_role' => 'required|exists:roles,id',
+        ]);
+
+        /**
+         * Mise à jour de l'utilisateur.
+         */
+        $utilisateur->update([
+            'prenom' => $validated['prenom'],
+            'nom' => $validated['nom'],
+            'email' => $validated['email'],
+            'id_role' => $validated['id_role'],
+        ]);
+
+        return redirect()
+            ->route('admin.utilisateurs.index')
+            ->with('success', 'L\'utilisateur a été modifié avec succès.');
     }
 }
