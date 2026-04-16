@@ -123,7 +123,7 @@
 
                             <button type="submit"
                                 class="bouton-supprimer" w-5 h-5 flex items-center justify-center rounded hover:bg-gray-100 data-confirm=" Supprimer cette bouteille ?" aria-label="Supprimer la bouteille">
-                                <img src="{{ asset('images/symbole/symbole-x-noir.svg') }}" class="w-4 h-4">
+                                <img src="{{ asset('images/symbole/symbole-x-gris.svg') }}" class="w-4 h-4">
                             </button>
                         </form>
                     </div>
