@@ -12,7 +12,6 @@
 
 @section('content')
 <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
-<script type="module" src="{{ asset('js/confirmation-suppression.js') }}"></script>
 
 <section class="px-4 py-5 pb-48 max-w-5xl mx-auto font-roboto">
 

@@ -144,4 +144,24 @@ class ListeAchatController extends Controller
 
         return back()->with('success', 'Bouteille retirée de la liste.');
     }
+
+    public function updateQuantite(Request $request, $listeId, $bouteilleId)
+    {
+        $liste = ListeAchat::findOrFail($listeId);
+
+        $bouteille = $liste->bouteilles()->where('liste_achat_bouteille.id_bouteille', $bouteilleId)->firstOrFail();
+        $pivot = $bouteille->pivot;
+
+        if ($request->action === 'increment') {
+            $pivot->quantite++;
+        }
+
+        if ($request->action === 'decrement') {
+            $pivot->quantite = max(1, $pivot->quantite - 1);
+        }
+
+        $pivot->save();
+
+        return back();
+    }
 }

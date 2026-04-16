@@ -11,7 +11,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap"
         rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
+    <script type="module" src="{{ asset('js/confirmer-modal.js') }}"></script>
 </head>
+
+<div id="confirmModal" class="hidden fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+    <div class="bg-white rounded-lg shadow-xl w-[90%] max-w-sm overflow-hidden">
+        <div class="bg-[#A83248] w-full p-4 flex items-center justify-center gap-2">
+            <h2 class="text-lg font-semibold text-white">Confirmation</h2>
+            <!-- <img src="{{ asset('images/symbole/vin.png') }}" alt="icon" class="w-5 h-5"> -->
+        </div>
+        <div class="p-5">
+            <p id="confirmMessage" class="text-sm text-gray-600">Êtes-vous sûr de vouloir supprimer ?</p>
+            <div class="flex justify-end gap-3 mt-5">
+                <button id="cancelModal" class="px-4 py-2 rounded border text-gray-600">Annuler</button>
+                <button id="confirmModalBtn" class="px-4 py-2 rounded bg-[#A83248] text-white ">Supprimer</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <body class="flex flex-col min-h-screen">
     <header class="bg-[#7A1E2E] relative py-4">

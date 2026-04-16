@@ -4,7 +4,6 @@
 
 @section('content')
 <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
-<script type="module" src="{{ asset('js/confirmation-suppression.js') }}"></script>
 
 <div class="m-4 flex items-start justify-between gap-4">
 
@@ -87,10 +86,13 @@
                     @method('DELETE')
 
                     <button type="submit"
+                        data-confirm="Supprimer ce cellier ?"
                         class="bouton-supprimer w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100"
                         title="Supprimer le cellier"
                         aria-label="Supprimer le cellier">
+
                         <img src="{{ asset('images/icons/poubelle.svg') }}" alt="" aria-hidden="true" class="w-6 h-6">
+
                     </button>
                 </form>
             </div>
