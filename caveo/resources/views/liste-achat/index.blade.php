@@ -92,9 +92,9 @@
             <div class="space-y-2">
                 @foreach($liste->bouteilles as $bouteille)
                 <div class="flex justify-between items-start border rounded p-2 gap-4">
-                    <span class="flex-1 break-words">
+                    <a href="{{ route('bouteilles.show', $bouteille->id) }}?source=catalogue" class="flex-1 break-words underline text-[#7A1E2E]">
                         {{ $bouteille->nom }}
-                    </span>
+                    </a>
 
                     <div class="flex items-center gap-4 shrink-0">
                         <span class="text-sm text-gray-600 whitespace-nowrap">
