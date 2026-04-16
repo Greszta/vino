@@ -8,6 +8,7 @@ use App\Http\Controllers\InventaireController;
 use App\Http\Controllers\InventaireSaqController;
 use App\Http\Controllers\ListeAchatController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UtilisateurController;
 use App\Models\Bouteille;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -27,20 +28,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 /**
- * Routes accessibles uniquement aux utilisateurs connectés.
- */
-Route::middleware('auth')->group(function () {
-
-  /**
-   * Route de la page d'accueil.
-   *
-   * @return \Illuminate\View\View
-   */
-  Route::get('/accueil', function () {
-    return view('welcome');
-  })->name('accueil');
-
-  /**
    * Routes pour l'inscription.
    */
   Route::get('/inscription', function () {
@@ -56,6 +43,20 @@ Route::middleware('auth')->group(function () {
   Route::get('/', [AuthController::class, 'create'])->name('connexion');
   Route::post('/', [AuthController::class, 'store'])->name('auth.store');
   Route::get('/deconnexion', [AuthController::class, 'destroy'])->name('deconnexion');
+
+/**
+ * Routes accessibles uniquement aux utilisateurs connectés.
+ */
+Route::middleware('auth')->group(function () {
+
+  /**
+   * Route de la page d'accueil.
+   *
+   * @return \Illuminate\View\View
+   */
+  Route::get('/accueil', function () {
+    return view('welcome');
+  })->name('accueil');
 
   /**
    * Route vers le catalogue des bouteilles.
