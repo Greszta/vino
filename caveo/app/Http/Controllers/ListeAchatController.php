@@ -90,11 +90,9 @@ class ListeAchatController extends Controller
     {
         $utilisateur = Auth::user();
 
-        abort_if(
-            $liste->id_utilisateur !== $utilisateur->id,
-            403,
-            'Accès non autorisé à cette liste d\'achat.'
-        );
+        if ($liste->id_utilisateur !== $utilisateur->id) {
+            abort(403);
+        }
     }
 
     public function addBouteille(Request $request, ListeAchat $liste)
@@ -143,5 +141,25 @@ class ListeAchatController extends Controller
         $liste->bouteilles()->detach($bouteille->id);
 
         return back()->with('success', 'Bouteille retirée de la liste.');
+    }
+
+    public function updateQuantite(Request $request, $listeId, $bouteilleId)
+    {
+        $liste = ListeAchat::findOrFail($listeId);
+
+        $bouteille = $liste->bouteilles()->where('liste_achat_bouteille.id_bouteille', $bouteilleId)->firstOrFail();
+        $pivot = $bouteille->pivot;
+
+        if ($request->action === 'increment') {
+            $pivot->quantite++;
+        }
+
+        if ($request->action === 'decrement') {
+            $pivot->quantite = max(1, $pivot->quantite - 1);
+        }
+
+        $pivot->save();
+
+        return back();
     }
 }
