@@ -29,7 +29,7 @@
     <form method="POST"
         action="{{ route('celliers.bouteilles.update', [$cellier, $bouteille]) }}"
         enctype="multipart/form-data"
-        class="flex flex-col gap-5">
+        class="flex flex-col gap-5" novalidate>
         @csrf
         @method('PUT')
 
