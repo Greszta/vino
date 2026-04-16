@@ -90,11 +90,9 @@ class ListeAchatController extends Controller
     {
         $utilisateur = Auth::user();
 
-        abort_if(
-            $liste->id_utilisateur !== $utilisateur->id,
-            403,
-            'Accès non autorisé à cette liste d\'achat.'
-        );
+        if ($liste->id_utilisateur !== $utilisateur->id) {
+            abort(403);
+        }
     }
 
     public function addBouteille(Request $request, ListeAchat $liste)
