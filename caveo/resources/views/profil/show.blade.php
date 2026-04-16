@@ -21,13 +21,15 @@
                     </div>
             </div>
                 <div class="flex flex-col gap-3 items-center">
-                    <a href="{{ route('deconnexion') }}" class="w-3/5 max-w-xs  p-1 flex items-center justify-center border bg-[#7A1E2E] border-[#7A1E2E]  text-white rounded-md shadow">Se déconnecter</a>
+                    <a href="{{ route('deconnexion') }}" class="w-3/5 max-w-xs  p-1 flex items-center justify-center border bg-[#A83248] border-[#A83248]  text-white rounded-md shadow">Se déconnecter</a>
                     <form method="POST" action="{{ route('profil.destroy') }}" class="w-3/5 max-w-xs">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
-                                onclick="return confirm('Es-tu sûr de vouloir supprimer ton compte?')"
-                                class="w-full  p-1 flex items-center justify-center border bg-white border-gray-300 rounded-md shadow">
+                                data-confirm="Êtes-vous sûr de supprimer votre compte ?"
+                                class="w-full  p-1 flex items-center justify-center border bg-white border-gray-300 rounded-md shadow"
+                                title="Êtes-vous sûr de supprimer votre compte"
+                                aria-label="Êtes-vous sûr de supprimer votre compte">
                                 Supprimer mon compte
                         </button>
                     </form>
