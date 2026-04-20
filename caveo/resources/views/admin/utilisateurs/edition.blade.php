@@ -43,8 +43,6 @@
                     id="prenom"
                     name="prenom"
                     value="{{ old('prenom', $utilisateur->prenom) }}"
-                    maxlength="35"
-                    required
                     placeholder="Ex. Marie"
                     class="w-full border rounded px-3 py-3 @error('prenom') border-red-500 @enderror">
                 @error('prenom')
@@ -62,8 +60,6 @@
                     id="nom"
                     name="nom"
                     value="{{ old('nom', $utilisateur->nom) }}"
-                    maxlength="35"
-                    required
                     placeholder="Ex. Dupont"
                     class="w-full border rounded px-3 py-3 @error('nom') border-red-500 @enderror">
                 @error('nom')
@@ -81,8 +77,6 @@
                     id="email"
                     name="email"
                     value="{{ old('email', $utilisateur->email) }}"
-                    maxlength="255"
-                    required
                     placeholder="exemple@courriel.com"
                     class="w-full border rounded px-3 py-3 @error('email') border-red-500 @enderror">
                 @error('email')
