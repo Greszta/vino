@@ -1,6 +1,11 @@
 @extends('layouts.main')
 @section('title', 'Profil')
 @section('content')
+@section('deconnexion')
+<a href="{{ route('deconnexion') }}" class="text-white text-2xl leading-none" aria-label="Deconnexion">
+    <img src="/images/icons/deconnexion.svg" alt="Deconnexion" class="w-10 h-10">
+</a>
+@endsection
     <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
     
         <div class="min-h-[calc(100vh-90px)] flex flex-col justify-between py-6 px-4 sm:px-6 lg:px-8 pb-24">
@@ -40,14 +45,13 @@
                                 </a>
                             </div>
                 </div>
-                <div class="flex flex-col gap-3 items-center my-5">
-                    <a href="{{ route('deconnexion') }}" class="w-3/5 max-w-xs  p-1 flex items-center justify-center border bg-[#A83248] border-[#A83248]  text-white rounded-md shadow">Se déconnecter</a>
+                <div class="flex flex-col items-center ">
                     <form method="POST" action="{{ route('profil.destroy') }}" class="w-3/5 max-w-xs">
                         @csrf
                         @method('DELETE')
                         <button type="submit"
                                 data-confirm="Êtes-vous sûr de supprimer votre compte ?"
-                                class="w-full  p-1 flex items-center justify-center border bg-white border-gray-300 rounded-md shadow"
+                                class="w-full  p-1 flex items-center justify-center border bg-white border-gray-300 rounded-md shadow text-gray-500"
                                 title="Êtes-vous sûr de supprimer votre compte"
                                 aria-label="Êtes-vous sûr de supprimer votre compte">
                                 Supprimer mon compte
