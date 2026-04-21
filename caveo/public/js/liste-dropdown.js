@@ -11,7 +11,13 @@ document.querySelectorAll(".toggle-liste").forEach((el) => {
     el.addEventListener("click", (e) => {
         if (e.target.closest("a, button, form")) return;
 
-        target.classList.toggle("hidden");
+
+        const isHidden = target.classList.toggle("hidden");
+        target.ariaExpanded = !isHidden; //pour les lecteurs d'écran
+
+        //pour gérer le triangle "ouvert/fermer"
+        e.currentTarget.querySelector("h2 span.open").classList.toggle("hidden", !hasClass);
+        e.currentTarget.querySelector("h2 span.close").classList.toggle("hidden", hasClass);
 
         // Sauvegarde temporairement si ouvert ou fermer
         if (target.classList.contains("hidden")) {

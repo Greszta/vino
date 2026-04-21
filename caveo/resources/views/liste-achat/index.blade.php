@@ -42,6 +42,8 @@
             <!-- GAUCHE : TITRE -->
             <div class="min-w-0">
                 <h2 class="font-semibold text-lg">
+                    <span class="open text-base">&#9660</span>
+                    <span class="close text-base hidden">&#9650</span>
                     {{ $liste->nom }}
                 </h2>
 
@@ -78,7 +80,7 @@
         </div>
 
         <!-- CONTENUE DROPDOWN -->
-        <div id="liste-{{ $liste->id }}" class="hidden border-t p-4">
+        <div id="liste-{{ $liste->id }}" class="hidden border-t p-4" aria-expanded="false">
             @if($liste->bouteilles->isEmpty())
             <p class="text-sm text-gray-500">
                 Aucune bouteille dans cette liste
