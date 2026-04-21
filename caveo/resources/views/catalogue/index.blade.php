@@ -207,7 +207,7 @@
 @else
 @foreach($bouteilles as $bouteille)
 <div class="flex gap-6 m-4 mb-6 font-roboto border p-4 rounded">
-    <div class="w-[90px] flex justify-center items-center">
+    <div class="w-[70px] flex justify-center items-center">
         <img src="{{ $bouteille->image ?? asset('images/bouteille-vide.png') }}" alt="" class="w-auto h-[135px]">
     </div>
 
@@ -218,11 +218,11 @@
             </h2>
 
             <div class="flex items-center text-sm text-gray-600 space-x-2">
-                <p>{{ $bouteille->pays ?? "" }}</p>
-                <span>|</span>
-                <p>{{ $bouteille->format ?? "" }} ml</p>
-                <span>|</span>
-                <p>{{ $bouteille->type ?? "" }}</p>
+                {{ collect([
+                    $bouteille->millesime,
+                    $bouteille->format ? $bouteille->format . ' ml' : null,
+                    $bouteille->type,
+                ])->filter()->implode(' | ') }}
             </div>
 
             <p class="mt-2 font-medium mb-3">
@@ -257,13 +257,13 @@
                 data-bouteille-nom="{{ $bouteille->nom }}"
                 title="Ajouter à la liste d'achats"
                 aria-label="Ajouter à la liste d'achats">
-                <img src="{{ asset('images/icons/liste.svg') }}" class="w-6 h-6">
+                <img src="{{ asset('images/icons/liste-ajouter.svg') }}" class="w-8 h-8">
             </button>
             @else
             <a href="{{ route('achat.create') }}"
                 class="ml-auto px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 flex items-center gap-2 w-max"
                 title="Créer une liste d'achat">
-                <img src="{{ asset('images/icons/liste.svg') }}" class="w-6 h-6">
+                <img src="{{ asset('images/icons/liste.svg') }}" class="w-8 h-8">
             </a>
             @endif
         </div>

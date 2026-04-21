@@ -16,8 +16,8 @@
     </div>
 
     <a href="{{ route('achat.create') }}"
-        class="bg-[#A83248] text-white px-4 py-3 rounded font-semibold whitespace-nowrap">
-        Nouvelle liste
+        class="bg-[#A83248] text-white px-3 py-3 rounded font-semibold whitespace-nowrap">
+        <img src="{{ asset('images/symbole/ajouter-blanc.svg') }}" alt="Ajouter une liste d'achat" class="w-6 h-6">
     </a>
 </div>
 
@@ -41,9 +41,13 @@
 
             <!-- GAUCHE : TITRE -->
             <div class="min-w-0">
-                <h2 class="font-semibold text-lg">
-                    <span class="open text-base">&#9660</span>
-                    <span class="close text-base hidden">&#9650</span>
+                <h2 class="font-semibold text-lg flex items-center gap-2">
+                    <span class="open text-base">
+                        <img src="{{ asset('images/fleches/bas-rouge.svg') }}" alt="fleche vers le bas" class="w-3 h-3">
+                    </span>
+                    <span class="close text-base hidden">
+                        <img src="{{ asset('images/fleches/haut-rouge.svg') }}" alt="fleche vers le haut" class="w-3 h-3">
+                    </span>
                     {{ $liste->nom }}
                 </h2>
 

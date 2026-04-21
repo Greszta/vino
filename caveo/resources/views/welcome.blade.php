@@ -3,14 +3,14 @@
 @section('title', 'Caveo')
 
 @section('content')
-<section class="min-h-screen bg-[#F8F5F1] flex items-center justify-center px-6 py-12">
+<section class="min-h-screen bg-[#F8F5F1] px-6 py-12">
     <div class="w-full max-w-3xl mx-auto text-center font-roboto">
 
-        <div class="mb-8">
+        <!-- <div class="mb-8">
             <h1 class="text-5xl sm:text-6xl font-semibold text-[#7A1E2E]" style="font-family: 'Crimson Text', serif;">
                 Caveo
             </h1>
-        </div>
+        </div> -->
 
         <div class="mb-10 space-y-3">
             <p class="text-3xl sm:text-5xl leading-tight text-[#1A1A1A] font-light">

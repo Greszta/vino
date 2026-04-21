@@ -17,8 +17,8 @@
     </div>
 
     <a href="{{ route('celliers.create') }}"
-        class="bg-[#A83248] text-white px-4 py-3 rounded font-semibold whitespace-nowrap">
-        Nouveau
+        class="bg-[#A83248] text-white px-3 py-3 rounded font-semibold whitespace-nowrap">
+        <img src="{{ asset('images/symbole/ajouter-blanc.svg') }}" alt="Ajouter une liste d'achat" class="w-6 h-6">
     </a>
 </div>
 
@@ -36,9 +36,11 @@
 
     <div class="w-[90px] flex justify-center items-center shrink-0">
         <img
-            src="{{ asset('images/bouteille-rack.svg') }}"
+            src="{{ $loop->even
+                ? asset('images/bouteille-rack-inverse.svg')
+                : asset('images/bouteille-rack.svg') }}"
             alt="Illustration du cellier"
-            class="w-auto h-[135px]">
+            class="w-auto h-[100px]">
     </div>
 
     <div class="flex flex-col justify-between flex-1 min-w-0">

@@ -4,7 +4,7 @@
 @section('title', $cellier->nom)
 
 @section('fleche')
-<!-- Flèche de retour qui revient vers le cellier ou le catalogue selon la source -->
+<!-- Flèche de retour qui revient vers le cellier -->
 <a href="{{ route('celliers.index') }}" class="text-white text-2xl leading-none" aria-label="Retour">
     <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" alt="Flèche de retour" class="w-10 h-10">
 </a>
@@ -24,8 +24,8 @@
             <div class="flex gap-3 flex-wrap">
 
                 <a href="{{ route('catalogue.index') }}"
-                    class="border border-gray-300 px-4 py-3 rounded font-medium">
-                    Catalogue
+                    class="px-3 py-2 rounded font-medium">
+                    <img src="{{ asset('images/icons/loop-actif.svg') }}" alt="">
                 </a>
 
                 <a href="{{ route('celliers.bouteilles.create', $cellier) }}"
