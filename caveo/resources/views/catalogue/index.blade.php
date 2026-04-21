@@ -229,28 +229,17 @@
                 ])->filter()->implode(' | ') }}
             </div>
 
-                <p class="mt-2 font-medium mb-3">
-                    {{ $bouteille->prix ?? "Non spécifié" }} $
-                </p>
-            </div>
-
-            @if(optional(Auth::user()->role)->nom === 'admin')
-            <a href="{{ route('admin.bouteilles.edit', $bouteille) }}"
-                class="w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100 shrink-0"
-                title="Modifier la bouteille"
-                aria-label="Modifier la bouteille">
-                <img src="{{ asset('images/icons/crayon.svg') }}" alt="" aria-hidden="true" class="w-6 h-6">
-            </a>
-            @endif
+            <p class="mt-2 font-medium mb-3">
+                {{ $bouteille->prix ?? "Non spécifié" }} $
+            </p>
         </div>
 
+        @if(optional(Auth::user()->role)->nom !== 'admin')
         <div class="flex gap-1 flex-wrap">
-            @if(optional(Auth::user()->role)->nom !== 'admin')
             <a href="{{ route('bouteilles.show', $bouteille->id) }}?source=catalogue"
                 class="px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 flex items-center gap-2 w-max" title="Détail de la bouteille">
                 <img src="{{ asset('images/symbole/info.svg') }}" alt="information" class="w-6 h-6">
             </a>
-
 
             @if($celliers->isNotEmpty())
             <button type="button"
@@ -282,9 +271,18 @@
                 <img src="{{ asset('images/icons/liste.svg') }}" class="w-6 h-6">
             </a>
             @endif
-            @endif
         </div>
+        @endif
     </div>
+
+    @if(optional(Auth::user()->role)->nom === 'admin')
+    <a href="{{ route('admin.bouteilles.edit', $bouteille) }}"
+        class="self-start w-10 h-10 flex items-center justify-center border border-gray-300 rounded hover:bg-gray-100 shrink-0"
+        title="Modifier la bouteille"
+        aria-label="Modifier la bouteille">
+        <img src="{{ asset('images/icons/crayon.svg') }}" alt="" aria-hidden="true" class="w-6 h-6">
+    </a>
+    @endif
 </div>
 @endforeach
 @endif

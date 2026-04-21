@@ -16,6 +16,8 @@ Application de gestion de cellier développée avec Laravel.
 - Feature gestion compte utilisateur
 - Feature page d'erreur
 - Feature page d'accueil
+- Feature gestion comptes utilisateurs
+- Feature modification des information du catalogue
 
 ---
 
