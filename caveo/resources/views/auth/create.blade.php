@@ -29,9 +29,9 @@
                             <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                         @enderror
                 </div>
-                <div class="flex justify-end my-3">
+                <!-- <div class="flex justify-end my-3">
                     <a href="#" class="text-sm text-gray-500 underline">Mot de passe oublié?</a>
-                </div>
+                </div> -->
                 <button type="submit" class="w-full bg-[#7A1E2E] text-white py-2 rounded-lg">Se connecter</button>
             </form>
             <div class="flex items-center my-5">
