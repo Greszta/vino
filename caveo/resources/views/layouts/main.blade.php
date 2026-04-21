@@ -49,13 +49,6 @@
     <footer
         class="bg-[#FCF8F7] text-black fixed bottom-3 left-3 right-3 rounded-xl shadow-2xl ring-1 ring-gray-300 py-2">
         <div class="flex justify-around text-center">
-            <a href="{{ route('accueil') }}" class="flex flex-col items-center gap-1 px-3 py-1">
-                <img src="{{ request()->routeIs('accueil')
-                        ? asset('images/icons/home-actif.svg')
-                        : asset('images/icons/home-inactif.svg') }}" alt="Accueil" class="w-6 h-6 object-contain">
-                <p class="text-sm font-roboto font-medium">Accueil</p>
-            </a>
-
             <a href="{{ route('catalogue.index') }}" class="flex flex-col items-center gap-1 px-3 py-1">
                 <img
                     src="{{ request()->routeIs('catalogue.index')
@@ -71,6 +64,11 @@
                         ? asset('images/icons/profil-actif.svg')
                         : asset('images/icons/profil-inactif.svg') }}" alt="Utilisateurs" class="w-6 h-6 object-contain">
                 <p class="text-sm font-roboto font-medium">Utilisateurs</p>
+            </a>
+
+            <a href="{{ route('deconnexion') }}" class="flex flex-col items-center gap-1 px-3 py-1">
+                <img src="{{ asset('images/icons/deconnexion.svg') }}" alt="Déconnexion" class="w-6 h-6 object-contain">
+                <p class="text-sm font-roboto font-medium">Déconnexion</p>
             </a>
         </div>
     </footer>
