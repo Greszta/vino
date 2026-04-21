@@ -206,7 +206,7 @@
 </div>
 @else
 @foreach($bouteilles as $bouteille)
-<div class="flex gap-6 m-4 mb-6 font-roboto border p-4 rounded">
+<div class="flex gap-2 m-4 mb-6 font-roboto border pt-4 pb-4 pr-2 rounded">
     <div class="w-[70px] flex justify-center items-center">
         <img src="{{ $bouteille->image ?? asset('images/bouteille-vide.png') }}" alt="" class="w-auto h-[135px]">
     </div>
@@ -257,13 +257,13 @@
                 data-bouteille-nom="{{ $bouteille->nom }}"
                 title="Ajouter à la liste d'achats"
                 aria-label="Ajouter à la liste d'achats">
-                <img src="{{ asset('images/icons/liste-ajouter.svg') }}" class="w-8 h-8">
+                <img src="{{ asset('images/icons/liste-ajouter.svg') }}" class="w-6 h-6">
             </button>
             @else
             <a href="{{ route('achat.create') }}"
                 class="ml-auto px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 flex items-center gap-2 w-max"
                 title="Créer une liste d'achat">
-                <img src="{{ asset('images/icons/liste.svg') }}" class="w-8 h-8">
+                <img src="{{ asset('images/icons/liste.svg') }}" class="w-6 h-6">
             </a>
             @endif
         </div>
