@@ -36,7 +36,9 @@
 
     <div class="w-[90px] flex justify-center items-center shrink-0">
         <img
-            src="{{ asset('images/bouteille-rack.svg') }}"
+            src="{{ $loop->even
+                ? asset('images/bouteille-rack-inverse.svg')
+                : asset('images/bouteille-rack.svg') }}"
             alt="Illustration du cellier"
             class="w-auto h-[100px]">
     </div>
