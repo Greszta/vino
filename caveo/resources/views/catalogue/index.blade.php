@@ -207,7 +207,7 @@
 @else
 @foreach($bouteilles as $bouteille)
 <div class="flex gap-6 m-4 mb-6 font-roboto border p-4 rounded">
-    <div class="w-[90px] flex justify-center items-center">
+    <div class="w-[70px] flex justify-center items-center">
         <img src="{{ $bouteille->image ?? asset('images/bouteille-vide.png') }}" alt="" class="w-auto h-[135px]">
     </div>
 
@@ -218,11 +218,11 @@
             </h2>
 
             <div class="flex items-center text-sm text-gray-600 space-x-2">
-                <p>{{ $bouteille->pays ?? "" }}</p>
-                <span>|</span>
-                <p>{{ $bouteille->format ?? "" }} ml</p>
-                <span>|</span>
-                <p>{{ $bouteille->type ?? "" }}</p>
+                {{ collect([
+                    $bouteille->millesime,
+                    $bouteille->format ? $bouteille->format . ' ml' : null,
+                    $bouteille->type,
+                ])->filter()->implode(' | ') }}
             </div>
 
             <p class="mt-2 font-medium mb-3">
