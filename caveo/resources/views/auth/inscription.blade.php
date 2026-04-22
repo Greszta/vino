@@ -3,6 +3,8 @@
 @section('title', 'Inscription')
 
 @section('content')
+<script type="module" src="{{ asset('js/password-toggle.js') }}"></script>
+
     <div class="min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 pb-24">
             <div class="max-w-md w-full bg-white border border-[#E0E0E0] rounded-lg shadow-sm p-8">
             @if(session('status'))
@@ -57,16 +59,34 @@
 
                 <div>
                     <label for="mot_de_passe" class="block text-sm font-medium text-[#1A1A1A]">Mot de passe</label>
-                    <input id="mot_de_passe" name="mot_de_passe" type="password"
-                        class="mt-1 block w-full border-2 text-[#1A1A1A] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#A83248] focus:border-[#A83248] @error ('mot_de_passe') border-red-600 @enderror" />
+
+                    <div class="relative">
+                        <input id="mot_de_passe" name="mot_de_passe" type="password"
+                            class="mt-1 block w-full border-2 text-[#1A1A1A] rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#A83248] focus:border-[#A83248] @error ('mot_de_passe') border-red-600 @enderror">
+
+                        <button type="button" data-toggle-password data-target="mot_de_passe"
+                            class="absolute right-3 top-1/2 -translate-y-1/2">
+                            <img src="{{ asset('images/symbole/oeil-ferme.svg') }}" class="w-5 h-5" data-eye-icon>
+                        </button>
+                    </div>
+
                     <p class="mt-1 text-sm text-[#666666]">Minimum : 8 caractères</p>
                     @error('mot_de_passe')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
 
                 <div>
                     <label for="mot_de_passe_confirmation" class="block text-sm font-medium text-[#1A1A1A]">Confirmer le mot de passe</label>
-                    <input id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" type="password"
-                        class="mt-1 block w-full border-2 text-[#1A1A1A] rounded-md p-2 focus:outline-none focus:ring-2 focus:ring-[#A83248] focus:border-[#A83248] @error ('mot_de_passe_confirmation') border-red-600 @enderror" />
+
+                    <div class="relative">
+                        <input id="mot_de_passe_confirmation" name="mot_de_passe_confirmation" type="password"
+                            class="mt-1 block w-full border-2 text-[#1A1A1A] rounded-md p-2 pr-10 focus:outline-none focus:ring-2 focus:ring-[#A83248] focus:border-[#A83248] @error ('mot_de_passe_confirmation') border-red-600 @enderror">
+
+                        <button type="button" data-toggle-password data-target="mot_de_passe_confirmation"
+                            class="absolute right-3 top-1/2 -translate-y-1/2">
+                            <img src="{{ asset('images/symbole/oeil-ferme.svg') }}" class="w-5 h-5" data-eye-icon>
+                        </button>
+                    </div>
+
                     @error('mot_de_passe_confirmation')<p class="text-sm text-red-600 mt-1">{{ $message }}</p>@enderror
                 </div>
 
