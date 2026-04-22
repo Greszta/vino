@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rules;
 
 class UpdateUtilisateurRequest extends FormRequest
 {
@@ -30,6 +31,7 @@ class UpdateUtilisateurRequest extends FormRequest
             'nom' => 'required|string|max:35',
             'email' => 'required|email|max:255|unique:utilisateurs,email,' . $utilisateur->id,
             'id_role' => 'required|exists:roles,id',
+            'mot_de_passe' => ['nullable', 'confirmed', Rules\Password::defaults()],
         ];
     }
 
@@ -56,6 +58,8 @@ class UpdateUtilisateurRequest extends FormRequest
 
             'id_role.required' => 'Le rôle est obligatoire.',
             'id_role.exists' => 'Le rôle sélectionné n\'existe pas.',
+
+            'mot_de_passe.confirmed' => 'La confirmation du mot de passe ne correspond pas.',
         ];
     }
 
@@ -71,6 +75,8 @@ class UpdateUtilisateurRequest extends FormRequest
             'nom' => 'nom',
             'email' => 'adresse courriel',
             'id_role' => 'rôle',
+            'mot_de_passe' => 'mot de passe',
+            'mot_de_passe_confirmation' => 'confirmation du mot de passe',
         ];
     }
 }

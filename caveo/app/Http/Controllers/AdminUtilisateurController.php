@@ -6,6 +6,7 @@ use App\Http\Requests\UpdateUtilisateurRequest;
 use App\Models\Role;
 use App\Models\Utilisateur;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 /**
  * Contrôleur de gestion des utilisateurs (administration).
@@ -103,7 +104,19 @@ class AdminUtilisateurController extends Controller
          * La validation est gérée automatiquement par UpdateUtilisateurRequest.
          * Récupération des données validées.
          */
-        $utilisateur->update($request->validated());
+        $donnees = $request->validated();
+
+        /**
+         * Le mot de passe n'est mis à jour que s'il est renseigné.
+         * Sinon, on conserve celui déjà en base.
+         */
+        if (!empty($donnees['mot_de_passe'])) {
+            $donnees['mot_de_passe'] = Hash::make($donnees['mot_de_passe']);
+        } else {
+            unset($donnees['mot_de_passe']);
+        }
+
+        $utilisateur->update($donnees);
 
         return redirect()
             ->route('admin.utilisateurs.index')
