@@ -113,7 +113,7 @@
                     <div class="flex items-center gap-2">
 
                         @if($inventaire->bouteille)
-                        <a href="{{ route('bouteilles.show', $inventaire->bouteille->id) }}?source=cellier&inventaire={{ $inventaire->id }}"
+                        <a href="{{ route('bouteilles.show', $inventaire->bouteille->id) }}?source=cellier&inventaire={{ $inventaire->id }}&cellier={{ $inventaire->id_cellier }}"
                             class="px-2 py-2 border border-gray-300 rounded hover:bg-gray-100 flex items-center justify-center"
                             title="Détail de la bouteille"
                             aria-label="Voir les détails">

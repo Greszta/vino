@@ -1,15 +1,27 @@
 @extends('layouts.main')
 @section('title', 'Fiche détaillée')
 @section('fleche')
-    <!-- Flèche de retour qui revient à la page précédente (Cellier ou Catalogue) -->
-    <a href="{{ url()->previous() }}">
-        <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" alt="Flèche de retour" class="w-10 h-10">
+    @php
+        $source = request('source');
+        $cellierId = request('cellier');
+        $return = request('return');
+    @endphp
+
+    @if ($source === 'cellier' && $cellierId)
+        <a href="{{ route('celliers.show', $cellierId) }}">
+    @elseif ($source === 'catalogue' && $return)
+        <a href="{{ url()->previous() }}">
+    @else
+        <!-- fallback: Retourne de 3 pages si ont est aller dans les reviews -->
+        <a href="#" onclick="history.go(-3); return false;">
+    @endif
+        <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" class="w-10 h-10">
     </a>
 @endsection
 @section('content')
     <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
     <script type="module" src="{{ asset('js/confirmation-suppression.js') }}"></script>
-
+    
     <!-- Titre de la page en fonction de l'origine (Cellier ou Catalogue) -->
     <div class="px-3 pt-4 pb-28">
         <h2 class="mb-3 text-center text-xl text-[#7A1E2E]" style="font-family: 'Roboto', sans-serif;">
