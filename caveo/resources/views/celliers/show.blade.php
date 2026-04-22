@@ -110,7 +110,7 @@
                 </div>
 
                 <div class="mt-4 flex gap-4 items-center justify-between w-full">
-                    <div class="flex items-center gap-2">
+                    <div class="flex items-center gap-2 flex-wrap">
 
                         @if($inventaire->bouteille)
                         <a href="{{ route('bouteilles.show', $inventaire->bouteille->id) }}?source=cellier&inventaire={{ $inventaire->id }}&cellier={{ $inventaire->id_cellier }}"
