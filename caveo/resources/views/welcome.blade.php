@@ -2,6 +2,12 @@
 
 @section('title', 'Caveo')
 
+@section('deconnexion')
+<a href="{{ route('deconnexion') }}" class="text-white text-2xl leading-none" aria-label="Deconnexion">
+    <img src="/images/icons/deconnexion-blanc.svg" alt="Deconnexion" class="w-8 h-8">
+</a>
+@endsection
+
 @section('content')
 <section class="min-h-screen bg-[#F8F5F1] px-6 py-12">
     <div class="w-full max-w-3xl mx-auto text-center font-roboto">
