@@ -2,9 +2,20 @@
 @section('title', 'Fiche détaillée')
 @section('fleche')
     <!-- Flèche de retour qui revient à la page précédente (Cellier ou Catalogue) -->
-    <a href="{{ url()->previous() }}">
-        <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" alt="Flèche de retour" class="w-10 h-10">
-    </a>
+    @php
+        $source = request('source');
+        $cellierId = request('cellier');
+    @endphp
+
+    @if ($source === 'cellier' && $cellierId)
+        <a href="{{ route('celliers.show', $cellierId) }}">
+    @elseif ($source === 'catalogue')
+        <a href="{{ route('catalogue.index', request()->except('source')) }}">
+    @else
+        <a href="{{ route('catalogue.index') }}">
+    @endif
+            <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" class="w-10 h-10">
+        </a>
 @endsection
 @section('content')
     <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
