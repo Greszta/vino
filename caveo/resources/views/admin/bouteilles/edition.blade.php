@@ -45,7 +45,7 @@
                     name="nom"
                     value="{{ old('nom', $bouteille->nom) }}"
                     placeholder="Ex. Château Exemple"
-                    class="w-full border rounded px-3 py-2 text-sm @error('nom') border-red-500 @enderror"
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('nom') border-red-600 @enderror"
                     required>
                 @error('nom')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
@@ -59,7 +59,7 @@
                 </label>
                 <select name="type"
                     id="type"
-                    class="w-full border rounded px-3 py-2 text-sm @error('type') border-red-500 @enderror">
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('type') border-red-600 @enderror">
                     <option value="">Sélectionner un type</option>
                     @foreach($types as $t)
                     <option value="{{ $t }}" {{ old('type', $bouteille->type) === $t ? 'selected' : '' }}>
@@ -79,7 +79,7 @@
                 </label>
                 <select name="pays"
                     id="pays"
-                    class="w-full border rounded px-3 py-2 text-sm @error('pays') border-red-500 @enderror">
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('pays') border-red-600 @enderror">
                     <option value="">Sélectionner un pays</option>
                     @foreach($pays as $p)
                     <option value="{{ $p }}" {{ old('pays', $bouteille->pays) === $p ? 'selected' : '' }}>
@@ -100,7 +100,7 @@
                     </label>
                     <select name="format"
                         id="format"
-                        class="w-full border rounded px-3 py-2 text-sm @error('format') border-red-500 @enderror">
+                        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('format') border-red-600 @enderror">
                         <option value="">Sélectionner un format</option>
                         @foreach($formats as $f)
                         <option value="{{ $f }}" {{ (string) old('format', $bouteille->format) === (string) $f ? 'selected' : '' }}>
@@ -121,7 +121,7 @@
                         id="millesime"
                         name="millesime"
                         value="{{ old('millesime', $bouteille->millesime) }}"
-                        class="w-full border rounded px-3 py-2 text-sm @error('millesime') border-red-500 @enderror">
+                        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('millesime') border-red-600 @enderror">
                     @error('millesime')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -138,7 +138,7 @@
                         id="cepage"
                         name="cepage"
                         value="{{ old('cepage', $bouteille->cepage) }}"
-                        class="w-full border rounded px-3 py-2 text-sm @error('cepage') border-red-500 @enderror">
+                        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('cepage') border-red-600 @enderror">
                     @error('cepage')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -153,7 +153,7 @@
                         id="prix"
                         name="prix"
                         value="{{ old('prix', $bouteille->prix) }}"
-                        class="w-full border rounded px-3 py-2 text-sm @error('prix') border-red-500 @enderror">
+                        class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('prix') border-red-600 @enderror">
                     @error('prix')
                     <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                     @enderror
@@ -176,7 +176,7 @@
                     name="image"
                     value="{{ old('image', $bouteille->image) }}"
                     placeholder="https://www.saq.com/..."
-                    class="w-full border rounded px-3 py-2 text-sm @error('image') border-red-500 @enderror">
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('image') border-red-600 @enderror">
                 @error('image')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
@@ -189,7 +189,7 @@
                 </label>
                 <select name="pastille_gout"
                     id="pastille_gout"
-                    class="w-full border rounded px-3 py-2 text-sm @error('pastille_gout') border-red-500 @enderror">
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('pastille_gout') border-red-600 @enderror">
                     <option value="">Sélectionner une pastille</option>
                     @foreach($pastilles as $pastille)
                     <option value="{{ $pastille }}" {{ old('pastille_gout', $bouteille->pastille_gout) === $pastille ? 'selected' : '' }}>
@@ -211,7 +211,7 @@
                     id="description"
                     name="description"
                     rows="3"
-                    class="w-full border rounded px-3 py-2 text-sm @error('description') border-red-500 @enderror">{{ old('description', $bouteille->description) }}</textarea>
+                    class="w-full border rounded px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-[#A83248] focus:border-[#A83248] @error('description') border-red-600 @enderror">{{ old('description', $bouteille->description) }}</textarea>
                 @error('description')
                 <p class="text-red-600 text-sm mt-1">{{ $message }}</p>
                 @enderror
