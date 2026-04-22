@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     const toggles = document.querySelectorAll("[data-toggle-password]");
-    console.log("password toggle loaded");
 
     toggles.forEach((toggle) => {
         toggle.addEventListener("click", () => {
