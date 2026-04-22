@@ -4,17 +4,20 @@
     @php
         $source = request('source');
         $cellierId = request('cellier');
-        $return = request('return');
+        $previous = url()->previous();
+        $isCatalogue = str_contains($previous, '/catalogue');
     @endphp
 
     @if ($source === 'cellier' && $cellierId)
         <a href="{{ route('celliers.show', $cellierId) }}">
-    @elseif ($source === 'catalogue' && $return)
-        <a href="{{ url()->previous() }}">
+
+    @elseif ($isCatalogue)
+        <a href="{{ $previous }}">
+
     @else
-        <!-- fallback: Retourne de 3 pages si ont est aller dans les reviews -->
         <a href="#" id="js-back-3">
     @endif
+
         <img src="{{ asset('images/fleches/gauche-blanc.svg') }}" class="w-10 h-10">
     </a>
 @endsection
