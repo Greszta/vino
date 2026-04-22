@@ -74,8 +74,13 @@
             </div>
             <div class="flex flex-col text-center border border-b-2 rounded-lg shadow p-2 mt-4 bg-white ">
                 <h3 class="text-lg font-medium text-[#7A1E2E] p-2">Ajouts récents</h3>
+                @if($ajoutsRecents->isEmpty())
+                    <div class="mb-4 mx-2 p-2 bg-gray-50 border border-gray-200 text-gray-700 rounded text-center">
+                        Vous n’avez ajouté aucune bouteille
+                    </div>
+                @else
                 <div class="divide-y divide-gray-200">
-                @foreach($ajoutsRecents as $inv)
+                    @foreach($ajoutsRecents as $inv)
                     <div class="flex items-start space-x-2 p-2">
                         <div class="w-[50px] h-[70px] flex justify-center items-center">
                             <img src="{{ $inv->bouteille->image ?? asset('images/bouteille-vide.png') }}" alt="" class="h-full object-contain">
@@ -94,7 +99,8 @@
                             </p>
                         </div>
                     </div>
-                @endforeach
+                    @endforeach
+                @endif
                 </div>
             </div>
         </div>
