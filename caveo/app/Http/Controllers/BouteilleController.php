@@ -132,14 +132,14 @@ class BouteilleController extends Controller
             'prix' => 'nullable|numeric|min:0|max:99999.99',
             'quantite' => 'required|integer|min:0|max:999',
             'description' => 'nullable|string|max:2000',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ], [
             'nom.required' => 'Le nom de la bouteille est obligatoire.',
             'quantite.required' => 'La quantité est obligatoire.',
             'quantite.min' => 'La quantité ne peut pas être négative.',
             'image.image' => 'Le fichier doit être une image valide.',
             'image.mimes' => 'L’image doit être au format jpg, jpeg, png ou webp.',
-            'image.max' => 'L’image ne peut pas dépasser 2 Mo.',
+            'image.max' => 'L’image ne peut pas dépasser 10 Mo.',
         ]);
 
         $imagePath = null;
@@ -269,7 +269,7 @@ class BouteilleController extends Controller
             'prix' => 'nullable|numeric|min:0|max:99999.99',
             'quantite' => 'required|integer|min:0|max:999',
             'description' => 'nullable|string|max:2000',
-            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
         ], [
             'nom.required' => 'Le nom de la bouteille est obligatoire.',
             'nom.max' => 'Le nom ne peut pas dépasser 255 caractères.',
@@ -292,7 +292,7 @@ class BouteilleController extends Controller
             'description.max' => 'La description ne peut pas dépasser 2000 caractères.',
             'image.image' => 'Le fichier doit être une image valide.',
             'image.mimes' => 'L’image doit être au format jpg, jpeg, png ou webp.',
-            'image.max' => 'L’image ne peut pas dépasser 2 Mo.',
+            'image.max' => 'L’image ne peut pas dépasser 10 Mo.',
         ]);
 
         $imagePath = $bouteille->image;
@@ -334,6 +334,7 @@ class BouteilleController extends Controller
      * - vérifie que la bouteille est bien liée à ce cellier ;
      * - empêche la suppression d'une bouteille SAQ importée ;
      * - supprime d'abord l'entrée d'inventaire ;
+     * - supprime aussi l'image si la bouteille n'est plus utilisée ;
      * - supprime ensuite la bouteille si elle n'est plus utilisée
      *   dans aucun autre cellier.
      *
@@ -372,6 +373,10 @@ class BouteilleController extends Controller
         $encoreUtilisee = Inventaire::where('id_bouteille', $bouteille->id)->exists();
 
         if (!$encoreUtilisee) {
+            if ($bouteille->image && Storage::disk('public')->exists($bouteille->image)) {
+                Storage::disk('public')->delete($bouteille->image);
+            }
+
             $bouteille->delete();
         }
 
