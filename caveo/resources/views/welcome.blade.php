@@ -58,7 +58,7 @@
 
             @auth
             <a href="{{ route('catalogue.index') }}"
-                class="block pt-2 text-sm sm:text-base text-[#7A1E2E] underline underline-offset-4 hover:text-[#651826] transition">
+                class="block w-full rounded-full bg-[#E9E4E0] px-6 py-4 text-lg font-medium text-[#1A1A1A] hover:bg-[#DDD6D0] transition">
                 Explorer le catalogue
             </a>
             @endauth
