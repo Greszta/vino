@@ -6,12 +6,16 @@
         $cellierId = request('cellier');
         $previous = url()->previous();
         $isCatalogue = str_contains($previous, '/catalogue');
+        $isAchat = str_contains($previous, '/achat');
     @endphp
 
     @if ($source === 'cellier' && $cellierId)
         <a href="{{ route('celliers.show', $cellierId) }}">
 
     @elseif ($isCatalogue)
+        <a href="{{ $previous }}">
+
+    @elseif ($isAchat)
         <a href="{{ $previous }}">
 
     @else
