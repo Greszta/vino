@@ -1,4 +1,20 @@
-// Script pour effacer l'input lorsque l'on clique sur le X
 document.getElementById("clearBtn").addEventListener("click", function () {
-    document.getElementById("search-input").value = "";
+    const input = document.getElementById("search-input");
+    const form = document.getElementById("search-form");
+
+    if (!input) {
+        return;
+    }
+
+    if (!form) {
+        return;
+    }
+
+    input.value = "";
+
+    try {
+        form.submit();
+    } catch (e) {
+        // si encore erreur arrête l'essaie
+    }
 });

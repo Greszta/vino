@@ -3,7 +3,13 @@
 @section('title', 'Créer un cellier')
 
 @section('fleche')
-<a href="{{ route('celliers.index') }}" class="text-white text-2xl leading-none" aria-label="Retour">
+@php
+    $previous = url()->previous();
+@endphp
+
+<a href="{{ str_contains($previous, 'catalogue') ? $previous : route('celliers.index') }}"
+   class="text-white text-2xl leading-none"
+   aria-label="Retour">
     <img src="/images/fleches/gauche-blanc.svg" alt="Flèche de retour" class="w-10 h-10">
 </a>
 @endsection
@@ -34,8 +40,12 @@
                 Enregistrer
             </button>
 
-            <a href="{{ route('celliers.index') }}"
-                class="w-1/2 text-center border py-3 rounded font-medium">
+            @php
+                $previous = url()->previous();
+            @endphp
+            
+            <a href="{{ str_contains($previous, 'catalogue') ? $previous : route('celliers.index') }}"
+               class="w-1/2 text-center border py-3 rounded font-medium">
                 Annuler
             </a>
         </div>

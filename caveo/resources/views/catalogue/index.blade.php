@@ -13,21 +13,32 @@
 
 <script type="module" src="{{ asset('js/filtre.js') }}"></script>
 <script type="module" src="{{ asset('js/cellier-overlay.js') }}"></script>
-<script type='module' src="{{ asset('js/recherche.js') }}"></script>
-<script type='module' src="{{ asset('js/renitialiser-bouton.js') }}"></script>
 <script type='module' src="{{ asset('js/modale-liste-achat.js') }}"></script>
 <script type="module" src="{{ asset('js/message-flash-auto.js') }}"></script>
+
+<style>
+input[type="search"]::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+input[type="search"]:focus {
+  border: 2px solid #A83248;
+  outline: none;
+  box-shadow: none;
+}
+</style>
 
 <form method="GET" action="{{ url()->current() }}" id="search-form">
     <div class="m-4">
         <div class="flex gap-2 items-stretch">
-            <input type="text" name="recherche"
+            <input type="search" name="recherche"
                 value="{{ request('recherche') }}"
                 placeholder="Rechercher une bouteille..."
                 class="border rounded px-3 h-12 w-full"
                 id="search-input">
 
-            <button type="submit" id="clearBtn" class="bg-[#A83248] text-white px-4 h-12 rounded flex items-center justify-center" title="Réinitialiser la recherche">
+            <button type="button" id="clearBtn" class="bg-[#A83248] text-white px-4 h-12 rounded flex items-center justify-center" title="Réinitialiser la recherche">
                 <img src="{{ asset('images/symbole/symbole-x.svg') }}" alt="réinitialiser" class="w-6 h-6">
             </button>
         </div>
@@ -495,5 +506,8 @@
         </div>
     </div>
 </div>
+
+<script type='module' src="{{ asset('js/recherche.js') }}"></script>
+<script type='module' src="{{ asset('js/renitialiser-bouton.js') }}"></script>
 
 @endsection

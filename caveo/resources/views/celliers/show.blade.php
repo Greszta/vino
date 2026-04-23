@@ -24,7 +24,7 @@
             <div class="flex gap-3 flex-wrap">
 
                 <a href="{{ route('catalogue.index') }}"
-                    class="px-3 py-2 rounded font-medium">
+                    class="px-2 py-2 rounded font-medium border-2 border-[#8B1E3F]">
                     <img src="{{ asset('images/icons/loop-actif.svg') }}" alt="un icone de loupe pour envoyer au catalogue" title="Chercher une bouteille dans le catalogue">
                 </a>
 
