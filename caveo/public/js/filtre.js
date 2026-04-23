@@ -16,13 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // Quand on clique sur le bouton "Filtres"
     openBtn.addEventListener("click", () => {
-        // On rend le panneau visible (évite le flash au chargement)
-        panel.classList.remove("hidden");
-
-        setTimeout(() => {
-            // On fait apparaître le panneau en supprimant la classe qui le déplace hors de l'écran
-            panel.classList.remove("translate-y-full");
-        }, 10);
+        // On fait apparaître le panneau en supprimant la classe qui le déplace hors de l'écran
+        panel.classList.remove("translate-y-full");
 
         // On affiche l'overlay
         overlay.classList.remove("hidden");
@@ -36,12 +31,8 @@ document.addEventListener("DOMContentLoaded", () => {
         // On renvoie le panneau hors de l'écran
         panel.classList.add("translate-y-full");
 
-        setTimeout(() => {
-            // On cache le panneau
-            panel.classList.add("hidden");
-            // On cache l'overlay
-            overlay.classList.add("hidden");
-        }, 300);
+        // On cache l'overlay
+        overlay.classList.add("hidden");
 
         // On réactive le scroll de la page
         document.body.style.overflow = "";
